@@ -1,0 +1,12 @@
+% 参考文献：走官方模板的 BibTeX 机制（gmcm.bst = gbt7714-unsrt.bst）。
+%
+% 文献条目写在 reference.bib，正文用 \cite{键} 引用。
+% 编译链必须是 xelatex → bibtex → xelatex → xelatex（见 ../compile.sh）。
+%
+% 两个静默失败点：
+%   ① bibtex 只收录「被 \cite 过」的条目——没引用过的条目不会出现在 PDF 里；
+%   ② 漏跑 bibtex 时 \cite 渲染成 [?]，而 xelatex 不报任何错。
+%
+% 位置：main.tex 里 \input{references} 排在附录之前，顺序不能反。
+\bibliographystyle{gmcm}
+\bibliography{reference}

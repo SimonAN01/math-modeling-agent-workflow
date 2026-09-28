@@ -1,0 +1,31 @@
+% 本文件被 main.tex 的 \begin{appendices} ... \end{appendices} 包住，
+% 所以这里只写 \section，不要自己写 appendices 环境。
+% \section 会被渲染成「附录 A」，子小节是 A.1、A.2……
+
+\section{源程序}
+
+以下为本文全部计算程序的清单。所有代码在 Python 3.12 环境下可直接运行，
+按问题一至问题三的顺序执行即可完整复现正文中的全部数值结果。
+
+\renewcommand{\thesubsection}{A\thinskip.\thinskip\arabic{subsection}}
+
+% ── 放什么，不放什么 ──────────────────────────────────────────────
+% 只放【参与算出论文里数值】的计算程序：utils + 各子问题求解程序。
+% 【不放】生成流程图 / 示意图 / drawio XML 的脚本（如 make_diagrams.py）——
+% 那类代码正文是 drawio 样式串，单行可达 160+ 列（版心只容 68 列），
+% 在附录里每行折成两三行，对评委是噪音又不产生任何数值结论。
+
+% 文件名写在代码框的标题条上（等价于模板的 \begin{Python}{文件名}），
+% 子节标题只写说明，不要再重复文件名。
+% 路径基准：\lstinputlisting 相对【主文件 main.tex 所在的目录】解析，不是相对本文件。
+\subsection{数据加载与共享工具}
+\lstinputlisting[language=Python, title=utils.py]{../code/utils.py}
+
+\subsection{问题一：【短标题】}
+\lstinputlisting[language=Python, title=problem1.py]{../code/problem1.py}
+
+\subsection{问题二：【短标题】}
+\lstinputlisting[language=Python, title=problem2.py]{../code/problem2.py}
+
+\subsection{问题三：【短标题】}
+\lstinputlisting[language=Python, title=problem3.py]{../code/problem3.py}

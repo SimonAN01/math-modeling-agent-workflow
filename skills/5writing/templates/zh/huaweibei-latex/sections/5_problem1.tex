@@ -1,0 +1,50 @@
+\section{问题一：【短标题】}
+
+\subsection{模型建立}
+
+【模型假设、变量定义、目标函数与约束。公式编号由 cls 自动生成，
+形如 (5.1)——cls 里 \theequation 就是「节号.序号」。】
+
+\begin{equation}
+  \label{eq:p1_obj}
+  \min \sum_{i=1}^{n} c_i x_i
+\end{equation}
+
+\subsection{求解方法}
+
+【算法步骤、停止条件。算法的「输入/输出」标签已由模板设成中文，直接用即可。】
+
+\begin{algorithm}[H]
+  \caption{【算法名】}
+  \begin{algorithmic}[1]
+    \Require 【输入】
+    \Ensure  【输出】
+    \State 【步骤一】
+    \State 【步骤二】
+  \end{algorithmic}
+\end{algorithm}
+
+\subsection{求解结果}
+
+【关键数值必须与本次求解的实际结果一致，不得编造、估算或另行取整。】
+
+\begin{table}[H]
+  \centering
+  \caption{【结果表题】}
+  \label{tab:p1_result}
+  \begin{tabular}{cccc}
+    \toprule
+    【列一】 & 【列二】 & 【列三】 & 【列四】 \\
+    \midrule
+    【数据】 & 【数据】 & 【数据】 & 【数据】 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% 数据图同样只写裸文件名：
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width=0.8\textwidth]{fig_q1_error.pdf}
+%   \caption{【图题】}
+%   \label{fig:p1_error}
+% \end{figure}

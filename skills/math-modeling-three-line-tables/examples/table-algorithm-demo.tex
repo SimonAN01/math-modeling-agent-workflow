@@ -1,0 +1,169 @@
+% 编译：xelatex table-algorithm-demo.tex（建议编译两次以更新交叉引用）
+% 所有数值均为虚构教学数据；本文件不是任何论文的真实研究结果。
+\documentclass[UTF8,a4paper,11pt,fontset=none]{ctexart}
+\usepackage[margin=25mm,headheight=15pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{Liberation Serif}
+\setCJKmainfont[BoldFont={Noto Serif CJK SC Bold}]{Noto Serif CJK SC}
+\setCJKsansfont[BoldFont={Noto Sans CJK SC Bold}]{Noto Sans CJK SC}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,tabularx,array,threeparttable}
+\usepackage{siunitx}
+\sisetup{detect-weight=true,mode=text,table-number-alignment=center}
+\usepackage[ruled,linesnumbered,noline]{algorithm2e}
+\SetAlgorithmName{算法}{算法}{算法目录}
+\SetKwInput{KwIn}{输入}
+\SetKwInput{KwOut}{输出}
+\SetKw{KwReturn}{返回}
+\SetAlgoNoLine
+\SetAlFnt{\small}
+\SetAlgoNlRelativeSize{-1}
+\usepackage{caption}
+\captionsetup[table]{font=small,labelfont=bf,labelsep=quad,skip=7pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small 数学建模论文\quad 三线表专项优化}
+\fancyhead[R]{\small 排版示例}
+\fancyfoot[C]{\small\thepage\ /\ 3}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.25em}
+\linespread{1.22}
+\setlength{\tabcolsep}{9pt}
+\renewcommand{\arraystretch}{1.18}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\pagetitle}[2]{\noindent{\small #1}\par\vspace{3pt}\noindent{\LARGE\bfseries #2}\par\vspace{7pt}}
+\newcommand{\minor}[1]{\par\vspace{6pt}\noindent{\bfseries #1}\par}
+\begin{document}
+
+\pagetitle{01\quad 结果对比表}{只突出有依据的最佳值}
+
+同一评价设置下，不同方法的结果如表\ref{tab:results}所示。此处为虚构教学数据，只用于展示数值对齐、局部加粗和表注分工；不包含重复实验统计。
+
+\begin{table}[!htbp]
+\centering
+\begin{threeparttable}
+\caption{不同方法的误差与计算耗时（教学示例）}
+\label{tab:results}
+\begin{tabular}{@{}l S[table-format=2.2] S[table-format=1.2] S[table-format=1.2]@{}}
+\toprule
+\textbf{方法} & {\textbf{RMSE}$\downarrow$} & {\textbf{MAE}$\downarrow$} & {\textbf{耗时/s}$\downarrow$}\\
+\midrule
+基线A    & 12.50          & 9.60          & \bfseries 0.80\\
+对照B    & 10.40          & 7.90          & 1.20\\
+本文方法 & \bfseries 9.10 & \bfseries 7.10 & 0.95\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]
+\footnotesize
+\item[] 注：误差单位与预测量一致；$\downarrow$表示越小越优。粗体表示本例同列最佳报告值，不表示统计显著性。所有数值均为虚构教学数据。
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+本文方法的RMSE为9.10，较对照B降低12.5\%，计算耗时减少20.8\%；基线A的单次耗时最短，为0.80~s。
+
+\minor{为什么没有把“本文方法”整行加粗？}
+加粗表达的是同列最佳值，不是方法归属。本文方法的两项误差最小，但最短耗时来自基线A，因此0.95不应加粗。方法名、表头的结构强调与数据标亮应当分开。
+
+\minor{正文解释到这里是否足够？}
+这段正文已指出关键误差、相对改善以及时间维度的区别，不必再按行抄录所有数值。是否补充应用意义，取决于任务是否提供明确的误差容限或时间预算；不能自行补造约束。
+
+\minor{什么时候需要更多信息？}
+如果真实研究报告多次随机运行，应说明统计量、重复次数和变异来源。如果比较来自不同数据集、设备或预算，应分组或说明条件；不能用一个粗体掩盖不可比性。
+
+\vfill
+\noindent{\footnotesize 编排要点：表前短引出；表内精确比较；表注说明读法；表后提炼发现。数值标记只代表声明的比较规则。}
+
+\clearpage
+\pagetitle{02\quad 说明类表}{减少散文，不删除必要条件}
+
+表格可以有文字，但文字应当成为便于比较或查阅的字段。下面的处理仅演示表达压缩，不主张任何实际论文都应采用这些操作。
+
+\begin{table}[!htbp]
+\centering
+\caption{压缩前：操作说明重复使用叙述句}
+\label{tab:before}
+\small
+\begin{tabularx}{\linewidth}{@{}p{25mm}Y@{}}
+\toprule
+\textbf{处理对象} & \textbf{处理说明}\\
+\midrule
+序列内部短缺口 & 对两端均有有效观测的序列内部短缺口，采用线性插值的方法对缺失位置进行补全处理。\\
+可疑观测 & 根据前文已定义的异常判定规则，对可疑观测进行标记，并进入后续复核步骤。\\
+待比较指标 & 根据既定的参数估计范围完成标准化，具体参数来源在实验设置中统一说明。\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\begin{threeparttable}
+\caption{压缩后：按对象、操作和条件组织字段}
+\label{tab:after}
+\small
+\begin{tabularx}{\linewidth}{@{}p{30mm}p{26mm}Y@{}}
+\toprule
+\textbf{处理对象} & \textbf{操作} & \textbf{关键条件}\\
+\midrule
+序列内部短缺口 & 线性插值 & 两端观测有效\\
+可疑观测 & 标记与复核 & 按前文定义的判定规则\\
+待比较指标 & 标准化 & 参数估计范围见实验设置\\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}[flushleft]
+\footnotesize
+\item[] 注：这里的“短缺口”、判定规则和参数范围必须在实际论文中有明确的定义和可定位引用；示例不补造这些技术设置。
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+表\ref{tab:after}保留了操作和适用条件，去掉了“采用……的方法”“进行……处理”等重复句法。如果这些内容不承担查阅或对照职责，也可以直接改成正文，而不必保留一张表。
+
+\minor{压缩时保持三个区别}
+\textbf{删冗句，不删边界。} 适用条件、来源和关键定义不能随句子一起消失。
+
+\textbf{合理换行，不硬限字数。} 定性说明、规则和符号解释不必全部压成单行。
+
+\textbf{转移有目的，不把冗文搬进表注。} 表注保留阅读所必需的信息；详细原理仍归入正文。
+
+\clearpage
+\pagetitle{03\quad 算法三线框}{用控制流展示求解过程}
+
+候选方案的筛选过程见算法\ref{alg:selection}。本例面向给定的有限候选集，采用可行性过滤和目标比较；不是要求所有求解算法都采用这一结构。
+
+\begin{algorithm}[H]
+\caption{有限候选集合的可行方案筛选（教学示例）}
+\label{alg:selection}
+\KwIn{有限候选集$\mathcal{C}$；可行性判定$\operatorname{Feasible}$；可行候选上取有限实值的目标函数$f$（越小越优）。}
+\KwOut{选中的可行候选$x_{\mathrm{best}}$，或“无可行候选”状态。}
+$x_{\mathrm{best}}\gets\varnothing$；$b\gets+\infty$；$\mathrm{found}\gets\mathrm{false}$\;
+\ForEach{$x\in\mathcal{C}$}{
+  \If{$\operatorname{Feasible}(x)$}{
+    $v\gets f(x)$\;
+    \If{$v<b$}{
+      $x_{\mathrm{best}}\gets x$；$b\gets v$；$\mathrm{found}\gets\mathrm{true}$\;
+    }
+  }
+}
+\If{$\neg\mathrm{found}$}{
+  \KwReturn “无可行候选”\;
+}
+\KwReturn $x_{\mathrm{best}}$\;
+\end{algorithm}
+
+算法先过滤不可行候选，再按目标值更新当前方案；遍历结束后，返回给定候选集合内的最佳可行候选。目标值相同时保留先遇到的候选。这里没有声称已找到原始问题的全局最优解。
+
+\minor{算法框与流程图的约定不同}
+流程图节点不放公式和具体答案；算法框可以使用必要的变量、赋值、条件和短表达式，以便准确交代计算。长推导放在正文，实际得到的方案和指标放在结果表。
+
+\minor{终止与返回必须明确}
+本例的候选集有限，完成遍历即终止，因此不需要虚构“收敛阈值”。无可行候选的状态也有返回路径。迭代算法则应依照真实实现说明更新、停止条件及预算限制。
+
+\minor{算法文字不需要全部加粗}
+输入输出标签、控制流关键字提供视觉层次，普通操作保留正常字重；行号用于定位，缩进用于表达嵌套。不要将每一步扩成一段“目的说明”。
+
+\vfill
+\noindent{\footnotesize 实现说明：数据表使用booktabs与siunitx；算法使用algorithm2e的ruled风格。实际论文应复用原模板的编号、字体及宏包设置。}
+\end{document}
