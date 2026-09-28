@@ -1,7 +1,6 @@
 ---
 name: 1start-mathmodel
 description: "数学建模竞赛工作流入口。用于启动完整建模流程：询问用户偏好，生成 plan.md 和 todo.md，并按阶段调用赛题分析、建模、代码与图表、流程图、论文撰写、验证验收等 skills。"
-allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent, WebSearch, WebFetch
 ---
 
 # 数学建模工作流
@@ -43,9 +42,9 @@ allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent, WebSearch, WebFetc
 
 ## 工作流
 
-### 1. 询问用户偏好 AskUserQuestions
+### 1. 询问用户偏好
 
-在规划前，只询问会实质影响流程的问题。问题要少而关键。
+在规划前，只询问会实质影响流程的问题。问题要少而关键。使用当前智能体平台可用的提问能力；若平台不能交互提问，则采用用户已给出的偏好并在 `plan.md` 标注未确认项。
 
 优先询问（按重要性排序）：
 

@@ -1,7 +1,6 @@
 ---
 name: 5writing
 description: "数学建模竞赛论文撰写阶段，支持 Typst 和 LaTeX 双引擎。根据 ANALYSIS_MODELING_REPORT.md、RESULTS_REPORT.md 和 figures/*.pdf 选择比赛模板、排版引擎、组织章节，并在论文正文中按章节直接插入图表。"
-allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent, WebSearch, WebFetch
 ---
 
 # 竞赛论文撰写（Typst / LaTeX）
@@ -72,10 +71,10 @@ apmcm, default, mcm
 
 **撰写论文前必须让用户选择排版引擎。** 引擎决定后续所有步骤（模板路径、章节文件扩展名、图片插入语法、编译命令），选错会导致整篇论文格式错误。
 
-使用 AskUserQuestion 工具向用户询问："撰写论文使用哪种排版引擎？"
+使用当前智能体平台的交互提问能力向用户询问：“撰写论文使用哪种排版引擎？”
 
 - 选项 1：LaTeX（xelatex 编译，数学建模竞赛主流，模板已全部就绪）— 推荐选项放第一位
-- 选项 2：Typst（typst 编译，调用 typst-author skill 辅助写作）
+- 选项 2：Typst（typst 编译；平台有对应 Typst 专项能力时再调用）
 
 询问前先读取 `plan.md` 的"用户偏好 → 排版引擎"字段作为预选项：
 - 若 plan.md 已记录引擎选择，直接沿用；仅当用户提出新要求或现有项目文件与记录冲突时再询问。
@@ -84,7 +83,7 @@ apmcm, default, mcm
 
 根据确定的引擎选择对应模板族：
 
-- **Typst 引擎**：使用 `templates/<lang>/<竞赛>/main.typ`，调用 typst-author skill。编译命令 `typst compile main.typ`。
+- **Typst 引擎**：使用 `templates/<lang>/<竞赛>/main.typ`；平台有对应 Typst 专项能力时调用。编译命令 `typst compile main.typ`。
 - **LaTeX 引擎**：使用 `templates/<lang>/<竞赛>-latex/main.tex`，xelatex 编译（中文和英文均需跑两遍解决交叉引用）。编译命令 `xelatex -interaction=nonstopmode main.tex`（执行两次）。
   模板自带 `compile.sh` 就直接用它。**若模板带 `.bst` + `.bib`（华为杯即如此），必须走四趟
   `xelatex → bibtex → xelatex → xelatex`**，漏掉 bibtex 那趟引用会静默变成 `[?]`，
@@ -348,7 +347,7 @@ A_code.tex
 A_code.typ
 ```
 
-**正文写作应使用连贯的学术段落。避免在最终论文中出现工作流内部名称，如 `reports/`、`figures/` 或 `CLAUDE.md`。**
+**正文写作应使用连贯的学术段落。避免在最终论文中出现工作流内部名称，如 `reports/`、`figures/` 或智能体平台的规则文件名。**
 
 ### 步骤 5：参考文献
 
@@ -477,7 +476,7 @@ axiom  principle  problem  example  proof  solution
 
 ## LaTeX 写作要点
 
-以下要点供 **LaTeX 引擎**使用。Typst 引擎请调用 typst-author skill 获取语法帮助。
+以下要点供 **LaTeX 引擎**使用。Typst 引擎按其语法和项目模板执行；平台若有 Typst 专项能力可按需使用。
 
 ### 编译命令
 

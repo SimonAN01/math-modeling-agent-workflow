@@ -1,7 +1,6 @@
 ---
 name: 3coding-visual
 description: "数学建模编程实现与数据图表生成阶段。根据 ANALYSIS_MODELING_REPORT.md 编写可复现代码、运行求解、验证约束、输出 RESULTS_REPORT.md 并生成论文可用的数据驱动图表 PDF。"
-allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent, WebSearch, WebFetch
 ---
 
 # 编程实现与数据图表生成
@@ -216,7 +215,7 @@ for k, (name, ys) in enumerate(series.items()):
 
 `mm_style` 只管**样式**（字体/颜色/线宽/导出），**不管构图**。
 单张图之外怎么排——多面板、图例往哪放、y 轴范围怎么定——读
-`${SKILL_DIR:-$HOME/.claude/skills}/scientific-figure-making/references/common-patterns.md`
+`${AGENT_SKILLS_DIR:-$HOME/.local/share/agent-skills}/scientific-figure-making/references/common-patterns.md`
 （若本机装了该 skill；没装就按下面这几条做）。
 **只借它的构图思路，样式参数一律用 `mm_style`，不要照抄下面的值**：
 

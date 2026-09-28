@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEST="${1:-${CODEX_HOME:-$HOME/.codex}/skills}"
+DEST="${1:-${AGENT_SKILLS_DIR:-$HOME/.local/share/agent-skills}}"
 BACKUP="$DEST/.mathmodel-backups/$(date +%Y%m%d-%H%M%S)-$$"
 
 mkdir -p "$DEST" "$BACKUP"
